@@ -1,4 +1,13 @@
 # condor
+
+                         .___            
+  ____  ____   ____    __| _/___________ 
+_/ ___\/  _ \ /    \  / __ |/  _ \_  __ \
+\  \__(  <_> )   |  \/ /_/ (  <_> )  | \/
+ \___  >____/|___|  /\____ |\____/|__|   
+     \/           \/      \/             
+                                         
+
 Quickly deploy a containerized Wordpress/MariaDB instance on Vultr
 
 Note: This script works on debian distros only at this point (planned feature)
