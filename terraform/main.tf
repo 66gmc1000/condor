@@ -17,7 +17,7 @@ resource "vultr_startup_script" "deb-python-install" {
 resource "vultr_server" "my_server" {
   plan_id = "${var.one_cpu_one_gb_ram}"
   region_id = "${var.vultr_seattle}"
-  os_id = "${var.docker_centos}"
+  os_id = "${var.ubuntu_os}"
   label = "${var.hostname}"
   enable_ipv6 = true
   auto_backup = true

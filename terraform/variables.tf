@@ -3,17 +3,18 @@ variable "vultr_seattle" {
   default = "4"
 }
 
-# variable "vultr_seattle" {
-#   description = "Vultr Seattle Region"
+# variable "vultr_atlanta" {
+#   description = "Vultr Atlanta Region"
 #   default = "6"
 # }
 
-variable "docker_centos" {
+variable "ubuntu_os" {
   description = "Docker on CentOS 7"
   default = 215
 }
-# variable "one_cpu_one_gb_ram" {
-#   description = "1024 MB RAM,25 GB SSD,1.00 TB BW"
+# note - no public IP included in this plan (internal boxes only)
+# variable "one_cpu_512_mb_ram" {
+#   description = "512 MB RAM,10 GB SSD,500 MB BW"
 #   default = 200
 # }
 variable "one_cpu_one_gb_ram" {
