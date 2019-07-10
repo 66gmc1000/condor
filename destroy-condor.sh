@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ./deploy-condor.sh \
-# --apikey=77TFLIJ446ISIWIWCEOR7W6Q6IMF65RGMPVQ \
+# --apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
 # --environment=dev \
 # --hostname=condor
 
