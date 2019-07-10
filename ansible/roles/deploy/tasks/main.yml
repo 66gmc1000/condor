@@ -1,0 +1,45 @@
+---
+
+- name: pull mariadb image
+  docker_image:
+    name: mariadb
+
+- name: pull wordpress image
+  docker_image:
+    name: wordpress
+
+- name: make directories for persistant wp and mariadb storage
+  file:
+    path: /home/azureuser/wordpress
+    state: directory
+
+- name: docker run mariadb
+  docker_container:
+    name: wordpressdb
+    image: mariadb:latest
+    state: started
+    restart_policy: always
+    volumes:
+      - /home/azureuser/wordpress/database:/var/lib/mysql
+    env:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+- name: docker run wordpress
+  docker_container:
+    name: wordpress
+    image: wordpress:latest
+    state: started
+    restart_policy: always
+    volumes:
+      - /home/azureuser/wordpress/html:/var/www/html
+    ports:
+      - 8080:80
+    links:
+      - wordpressdb:wordpressdb
+    env:
+      WORDPRESS_DB_HOST: wordpressdb:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
