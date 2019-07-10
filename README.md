@@ -28,10 +28,16 @@ To Deploy:
 - Switch to the repo root directory: `cd condor`
 - Execute `./deploy-condor.sh` with required parameters:
 
-./deploy-condor.sh --apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
---hostname=MyCustomHostname
+`./deploy-condor.sh --apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --hostname=MyCustomHostname`
 
 - Visit http://IPADDRESS/wp-admin to configure your newly install Wordpress instance
+
+To Destroy:
+- Switch to the repo root directory: `cd condor`
+- Execute `./destroy-condor.sh` with required parameters:
+
+`./destroy-condor.sh --apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+
 
 Defaults (can be edited via ansible/roles/deploy/tasks/main.yml):
 

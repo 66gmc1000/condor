@@ -1,21 +1,12 @@
 #!/bin/bash
 
-# ./deploy-condor.sh \
-# --apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
-# --environment=dev \
-# --hostname=condor
+# ./destroy-condor.sh --apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 for i in "$@"
 do
     case $i in
         --apikey=*)
             API="${i#*=}"
-            ;;
-        --environment=*)
-            ENVIRONMENT="${i#*=}"
-            ;;
-        --hostname=*)
-            HOSTNAME="${i#*=}"
             ;;
     esac
 done
@@ -34,28 +25,25 @@ if [[ -z "$(type terraform)" ]]; then
   terraform
 fi
 
-# check if ansible is installed or not
-if [[ -z "$(sudo ansible-playbook)" ]]; then
-  read -p "Ansible is not installed. Press [Enter] to install now..."
-  sudo apt install software-properties-common
-  sudo apt-add-repository ppa:ansible/ansible -y
-  sudo apt update
-  sudo apt install ansible -y
-fi
+# # check if ansible is installed or not
+# if [[ -z "$(sudo ansible-playbook)" ]]; then
+#   read -p "Ansible is not installed. Press [Enter] to install now..."
+#   sudo apt install software-properties-common
+#   sudo apt-add-repository ppa:ansible/ansible -y
+#   sudo apt update
+#   sudo apt install ansible -y
+# fi
 
 # app check
 terraform=$(which terraform)
-ansible=$(which ansible-playbook)
+# ansible=$(which ansible-playbook)
 
 # create ssh key for new VPS (required by ansible)
-ssh-keygen -t rsa -b 4096 -f ./ansible-key -N ''
+# ssh-keygen -t rsa -b 4096 -f ./ansible-key -N ''
 
 # execute terraform job to destroy vps
 $terraform init terraform
-$terraform destroy \
--var api_key=${API} \
--var ssh_key="$(cat ./ansible-key.pub)" \
-terraform
+$terraform destroy -var api_key=${API} terraform
 
 # create wordpress line in ansible inventory
 # echo '[wordpress]' > ansible/inventory
@@ -68,5 +56,5 @@ terraform
 # sudo $ansible -i ansible/inventory --key-file="./ansible-key" ansible/site.yml 
 
 # echo out ip address to connect to
-echo "Connect to wordpress app using the IP address below"
+echo "VPS, sshkey, firewall rules and all other associated resources have been destroyed"
 
